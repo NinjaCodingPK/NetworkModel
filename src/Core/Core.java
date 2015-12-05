@@ -135,10 +135,11 @@ public class Core implements java.io.Serializable {
 
     }
     
-    public void SendPackage(int start, int end, javax.swing.JPanel panel) {
+    public void SendPackage(int start, int end, javax.swing.JPanel panel, javax.swing.JTextField field) {
 //        Sender s = new Sender(nodes.get(0), nodes.get(1), nodes, branches, panel);
-        Sender s = new Sender(nodes.get(start), nodes.get(end), panel);
+        Sender s = new Sender(nodes.get(start), nodes.get(end), panel, field);
         s.Clear();
+        field.setText("Transmission started");
         s.SendPackage(nodes.get(start));
 //        new Thread(s).start();
         

@@ -17,10 +17,11 @@ import java.util.logging.Logger;
  * @author wookie
  */
 public class Sender implements Runnable {
-    private final Object lock = new Object();
+    //private final Object lock = new Object();
+    private static boolean flag = false;
     private static  ArrayList<Node> usedNodes = new ArrayList<>();
     private static ArrayList<Line> usedBranches = new ArrayList<>();
-    private static long starttime;
+    private static long starttime = System.currentTimeMillis();
     //private static ArrayList<Sender> pool = new ArrayList<>();
     //private ArrayList<Node> nodes = new ArrayList<>();
     //private final ArrayList<Line> branches;
@@ -29,8 +30,10 @@ public class Sender implements Runnable {
     private final Node finalNode;
     private Line branch;
     private javax.swing.JPanel panel;
+    private javax.swing.JTextField field;
     
-    public Sender(Node start, Node end, Node finalNode, Line branch, javax.swing.JPanel panel) {
+    public Sender(Node start, Node end, Node finalNode, Line branch, javax.swing.JPanel panel, 
+                    javax.swing.JTextField field) {
        this.start = start;
        this.end = end;
        this.panel = panel;
@@ -38,19 +41,26 @@ public class Sender implements Runnable {
        this.branch = branch;
        //this.nodes = nodes;
        this.finalNode = finalNode;
+       this.field = field;
        
     }
     
-    public Sender(Node startNode, Node finalNode, javax.swing.JPanel panel) {
+    public Sender(Node startNode, Node finalNode, javax.swing.JPanel panel, javax.swing.JTextField field) {
        this.panel = panel;
        //this.branches = branches;
        //this.nodes = nodes;
        this.finalNode = finalNode;
        this.start = startNode;
+       this.field = field;
     }
     
     public void SendPackage(Node start) {
-        if(this.start == finalNode) {
+        if(usedNodes.contains(finalNode)) {
+            if(!flag) {
+                field.setText("Transmission's time : " 
+                   + Long.toString(System.currentTimeMillis() - starttime) + " ms");
+                flag = true;
+            }
         }
         else
         for(Line l : start.getConnetions()) {
@@ -58,16 +68,16 @@ public class Sender implements Runnable {
             if(!usedBranches.contains(l)) {
                 usedBranches.add(l);
                 if((!usedNodes.contains(l.getEndNode()) && (start != l.getEndNode()))) {
-                    usedNodes.add(l.getEndNode());
+                   // usedNodes.add(l.getEndNode());
                     //pool.add(new Sender(l.getEndNode(), l.getStartNode(), panel));
-                    new Thread(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel)).start();
+                    new Thread(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field)).start();
                     //pool.get(pool.size() - 1).run();
                 }
                 else 
                     if((!usedNodes.contains(l.getStartNode()) && (start != l.getStartNode()))) {
-                        usedNodes.add(l.getStartNode());
+                        //usedNodes.add(l.getStartNode());
                         //pool.add(new Sender(l.getEndNode(), l.getEndNode(), panel));
-                        new Thread(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel)).start();
+                        new Thread(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field)).start();
                         //pool.get(pool.size() - 1).run();
                     } 
             }
@@ -91,13 +101,16 @@ public class Sender implements Runnable {
                 branch.changeColor(Color.black, panel);
             //}
 
+            usedNodes.add(start);    
             SendPackage(start);
+            
         //}
     } 
     
     public void Clear() {
         usedNodes.clear();
         usedBranches.clear();
+        flag = false;
         //pool.clear();
     }
 }

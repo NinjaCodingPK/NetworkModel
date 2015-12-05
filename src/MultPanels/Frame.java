@@ -62,6 +62,7 @@ public class Frame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         ChangeWeightField1 = new javax.swing.JTextField();
         ChangeWeightField2 = new javax.swing.JTextField();
+        SendResult = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,7 +165,9 @@ public class Frame extends javax.swing.JFrame {
                         .addComponent(SaveButton)
                         .addGap(18, 18, 18)
                         .addComponent(LoadButton, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(1142, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(SendResult, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -197,9 +200,9 @@ public class Frame extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(ChangeWeightField1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
                                     .addComponent(ChangeWeightField2))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addComponent(graphicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(51, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,7 +252,8 @@ public class Frame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
-                    .addComponent(LoadButton))
+                    .addComponent(LoadButton)
+                    .addComponent(SendResult, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -300,7 +304,8 @@ public class Frame extends javax.swing.JFrame {
     private void SendButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SendButtonMouseClicked
         // TODO add your handling code here:
         core.SendPackage(Integer.parseInt(SendPackageStartField.getText()), 
-                        Integer.parseInt(SendPackageEndField.getText()), graphicPanel);
+                        Integer.parseInt(SendPackageEndField.getText()), 
+                            graphicPanel, SendResult);
         //core.getBranches().get(0).changeColor(Color.GREEN, graphicPanel);
     }//GEN-LAST:event_SendButtonMouseClicked
 
@@ -355,7 +360,10 @@ public class Frame extends javax.swing.JFrame {
                 .setWeight(Integer.parseInt(ChangeWeightField2.getText()),
                         graphicPanel);
     }//GEN-LAST:event_ChangeWeightButtonMouseClicked
-
+    
+    public void ShowResults(long time) {
+        SendResult.setText("Result of package transmission : " + Long.toString(time));
+    }
     /**
      * @param args the command line arguments
      */
@@ -409,6 +417,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton SendButton;
     private javax.swing.JTextField SendPackageEndField;
     private javax.swing.JTextField SendPackageStartField;
+    private javax.swing.JTextField SendResult;
     private MultPanels.GraphicsPanel graphicPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
