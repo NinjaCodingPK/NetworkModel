@@ -50,9 +50,11 @@ public class Line implements java.io.Serializable {
         //info = new LineInfo(Integer.toString(number), Math.abs(x0 - x1)/3, Math.abs(x0 - x1)/3);
     }
     
-    public Line(int number) {
+    public Line(int number, boolean isSatelite) {
         this.number = number;
         this.weight = weights[(int) (Math.random()*10)];
+        if(isSatelite)
+            this.weight *= 3;
         //info = new LineInfo(Integer.toString(number));
     }
       

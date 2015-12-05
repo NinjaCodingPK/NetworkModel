@@ -17,7 +17,23 @@ public class Core implements java.io.Serializable {
     private final ArrayList<Node> nodes = new ArrayList<>();
     private final ArrayList<Line> branches = new ArrayList<>();
     private final Integer weights[] = {1, 2, 3, 4, 5, 6}; 
-
+    
+    public Node getNodeByNum(int num) {
+        for(Node n : nodes) {
+            if(num == n.getNum())
+                return n;
+        }
+        return null;
+    }
+    
+    public Line getBranchByNum(int num) {
+        for(Line n : branches) {
+            if(num == n.getNumber())
+                return n;
+        }
+        return null;
+    }
+    
     public ArrayList<Node> getNodes() {
         return nodes;
     }
@@ -34,7 +50,7 @@ public class Core implements java.io.Serializable {
         branches.add(b);
     }
     
-    public void addConnection(Node n1, Node n2, javax.swing.JPanel panel) {
+    public void addConnection(Node n1, Node n2, boolean isSatelite, javax.swing.JPanel panel) {
         boolean isConnected = false;
         
         if(!branches.isEmpty())
@@ -45,14 +61,14 @@ public class Core implements java.io.Serializable {
                 }                
             }
         else {
-            Line l = new Line(0);
+            Line l = new Line(0, isSatelite);
             l.Connect(n1, n2, panel);
             addBranch(l);
             isConnected = true;
         }
         
         if(!isConnected) {
-            Line l = new Line(getBranches().get(getBranches().size() - 1).getNumber() + 1);
+            Line l = new Line(getBranches().get(getBranches().size() - 1).getNumber() + 1, isSatelite);
             l.Connect(n1, n2, panel);
             addBranch(l);
         }
@@ -60,25 +76,37 @@ public class Core implements java.io.Serializable {
     
     public void removeBranch(int num, javax.swing.JPanel panel) {
         //if(getBranches().get(num) != null) {
-            getBranches().get(num).getStartNode().removeConnection(getBranches().get(num));
-            getBranches().get(num).getEndNode().removeConnection(getBranches().get(num));
-            getBranches().get(num).destroyLine(panel);
-            this.branches.remove(getBranches().get(num));
+//            getBranches().get(num).getStartNode().removeConnection(getBranches().get(num));
+//            getBranches().get(num).getEndNode().removeConnection(getBranches().get(num));
+//            getBranches().get(num).destroyLine(panel);
+//            this.branches.remove(getBranches().get(num));
+            getBranchByNum(num).getStartNode().removeConnection(getBranchByNum(num));
+            getBranchByNum(num).getEndNode().removeConnection(getBranchByNum(num));
+            getBranchByNum(num).destroyLine(panel);
+            this.branches.remove(getBranchByNum(num));
         //}
         
     }
     
     public void removeNode(int num, javax.swing.JPanel panel) {
-        ArrayList<Line> temp = getNodes().get(num).getConnetions();
+//        Node temp = this.getNodeByNum(num);
+//        for(int i = 0; i < temp.g)
+//            removeBranch(l.getNumber(), panel);
+//        
+//        temp.destroyNode();
+//        this.nodes.remove(temp);
+        Node tempNode = this.getNodeByNum(num);
+        ArrayList<Line> temp = tempNode.getConnetions();
+        int s = temp.size();
 //        for(Line templ : temp) {
 //            //templ.getEndNode().removeConnection(templ);
 //            removeBranch(templ.getNumber(), panel);
 //        }
-        for(int i = 0; i < temp.size(); i++) {
-             removeBranch(temp.get(i).getNumber(), panel);
+        for(int i = 0; i < s; i++) {
+             removeBranch(temp.get(0).getNumber(), panel);
         }
-        getNodes().get(num).destroyNode();
-        this.nodes.remove(num);
+        tempNode.destroyNode();
+        this.nodes.remove(tempNode);
     }
     
     public void ClearScreen(javax.swing.JPanel panel) {
@@ -123,7 +151,7 @@ public class Core implements java.io.Serializable {
 //        }
         
         for(SLine sl : slines) {
-                addConnection(nodes.get(sl.getStartNode()), nodes.get(sl.getEndNode()), panel);
+                addConnection(nodes.get(sl.getStartNode()), nodes.get(sl.getEndNode()), false, panel);
                 
         }
         
