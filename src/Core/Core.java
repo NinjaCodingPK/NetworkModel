@@ -139,6 +139,7 @@ public class Core implements java.io.Serializable {
     public void load(ArrayList<SNode> snodes, ArrayList<SLine> slines, javax.swing.JPanel panel) {
         for(SNode sn : snodes) {
             this.nodes.add(new Node(sn.getNumber(), sn.getX(), sn.getY(), panel));
+            nodes.get(nodes.size() - 1).setState(sn.isState());
         }
        
 //        for(SLine sl : slines) {
@@ -165,10 +166,13 @@ public class Core implements java.io.Serializable {
     
     public void SendPackage(int start, int end, javax.swing.JPanel panel, javax.swing.JTextField field) {
 //        Sender s = new Sender(nodes.get(0), nodes.get(1), nodes, branches, panel);
-        Sender s = new Sender(nodes.get(start), nodes.get(end), panel, field);
-        s.Clear();
-        field.setText("Transmission started");
-        s.SendPackage(nodes.get(start));
+       if(nodes.get(start).isState() && nodes.get(start).isState()) {
+            Sender s = new Sender(nodes.get(start), nodes.get(end), panel, field);
+            s.Clear();
+            field.setText("Transmission started");
+            s.SendPackage(nodes.get(start));
+        } else
+           field.setText("Can't send package. One of the nodes is offline.");
 //        new Thread(s).start();
         
 //        Algorithm a = new Algorithm(nodes, branches);

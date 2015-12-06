@@ -21,7 +21,7 @@ public class SGraph implements java.io.Serializable {
         for(Node n : bign) {
             for(Line l : n.getConnetions())
                 connections.add(l.getNumber());
-            nodes.add(new SNode(n.getNum(), n.getX(), n.getY(), n.getColor(), connections));
+            nodes.add(new SNode(n.getNum(), n.getX(), n.getY(), n.isState(), connections));
             connections.clear();
         }
     }

@@ -22,7 +22,7 @@ public class Sender implements Runnable {
     private static  ArrayList<Node> usedNodes = new ArrayList<>();
     private static ArrayList<Line> usedBranches = new ArrayList<>();
     private static long starttime = System.currentTimeMillis();
-    //private static ArrayList<Sender> pool = new ArrayList<>();
+    private static ArrayList<Sender> pool = new ArrayList<>();
     //private ArrayList<Node> nodes = new ArrayList<>();
     //private final ArrayList<Line> branches;
     private Node start;
@@ -63,27 +63,31 @@ public class Sender implements Runnable {
             }
         }
         else
-        for(Line l : start.getConnetions()) {
-
-            if(!usedBranches.contains(l)) {
-                usedBranches.add(l);
-                if((!usedNodes.contains(l.getEndNode()) && (start != l.getEndNode()))) {
-                   // usedNodes.add(l.getEndNode());
-                    //pool.add(new Sender(l.getEndNode(), l.getStartNode(), panel));
-                    new Thread(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field)).start();
-                    //pool.get(pool.size() - 1).run();
+            if(start.isState())
+                for(Line l : start.getConnetions()) {
+            
+                    if(!usedBranches.contains(l)) {
+                        usedBranches.add(l);
+                        if((!usedNodes.contains(l.getEndNode()) && (start != l.getEndNode()))) {
+                            // usedNodes.add(l.getEndNode());
+                            //new Thread(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field)).start();
+                            pool.add(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field));
+                            new Thread(pool.get(pool.size() - 1)).start();
+  
+                        }
+                        else 
+                            if((!usedNodes.contains(l.getStartNode()) && (start != l.getStartNode()))) {
+                                //usedNodes.add(l.getStartNode());
+                                //new Thread(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field)).start();
+                                pool.add(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field));
+                                new Thread(pool.get(pool.size() - 1)).start();
+                            } 
                 }
-                else 
-                    if((!usedNodes.contains(l.getStartNode()) && (start != l.getStartNode()))) {
-                        //usedNodes.add(l.getStartNode());
-                        //pool.add(new Sender(l.getEndNode(), l.getEndNode(), panel));
-                        new Thread(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field)).start();
-                        //pool.get(pool.size() - 1).run();
-                    } 
-            }
 
-        }
-        
+            }
+        else
+        if(pool.isEmpty())
+            field.setText("Can't send package.");
         
     }
     
@@ -101,7 +105,8 @@ public class Sender implements Runnable {
                 branch.changeColor(Color.black, panel);
             //}
 
-            usedNodes.add(start);    
+            usedNodes.add(start); 
+            pool.remove(this);
             SendPackage(start);
             
         //}
@@ -111,7 +116,7 @@ public class Sender implements Runnable {
         usedNodes.clear();
         usedBranches.clear();
         flag = false;
-        //pool.clear();
+        pool.clear();
     }
 }
 

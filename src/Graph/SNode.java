@@ -18,11 +18,13 @@ public class SNode implements java.io.Serializable {
     private final int y;
     private final int number;
     private final ArrayList<Integer> connections; 
-    private final Color color;
+    private final boolean state;
+    //private final Color color;
     
-    public SNode(int number, int x, int y, Color color, ArrayList<Integer> c) {
+    public SNode(int number, int x, int y, boolean state, ArrayList<Integer> c) {
         this.number = number;
-        this.color = color;
+        //this.color = color;
+        this.state = state;
         this.x = x;
         this.y = y;
         this.connections = c;
@@ -44,8 +46,13 @@ public class SNode implements java.io.Serializable {
         return connections;
     }
 
-    public Color getColor() {
-        return color;
+    
+//    public Color getColor() {
+//        return color;
+//    }
+
+    public boolean isState() {
+        return state;
     }
    
         

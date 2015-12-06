@@ -30,6 +30,8 @@ public class Node extends JComponent implements java.io.Serializable {
     
     private final int num;
     private ArrayList<Line> connections = new ArrayList<>(); 
+    
+    private boolean state = true;
    
     //private Pair<Integer, Integer> cord;
     
@@ -50,9 +52,15 @@ public class Node extends JComponent implements java.io.Serializable {
         setOpaque(false);       
 
         addMouseListener(new MouseListener() {
-
+            
             @Override
-            public void mouseClicked(MouseEvent e) { }
+            public void mouseClicked(MouseEvent e) { 
+                //System.out.println(e.getButton());
+                if(e.getButton() == 3) { //right mouse button
+                    setState(!state);
+                    repaintNode();
+                }
+            }
 
             @Override
             public void mousePressed(MouseEvent e) {
@@ -209,12 +217,30 @@ public class Node extends JComponent implements java.io.Serializable {
 //        connections.clear();
 //    }
     
-    public void repaintNode(Color color) {
-        this.color = color;
+    public void repaintNode() {
+//        if(this.state)
+//            this.color = Color.green;
+//        else
+//            this.color = Color.red;
         destroyNode();
         panel.add(this);
         panel.repaint();
     }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
+        if(this.state)
+            this.color = Color.green;
+        else
+            this.color = Color.red;
+        
+    }
+    
+    
 
 }
 
