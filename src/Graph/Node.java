@@ -5,6 +5,7 @@
  */
 package Graph;
 
+import Core.Route;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class Node extends JComponent implements java.io.Serializable {
     
     private final int num;
     private ArrayList<Line> connections = new ArrayList<>(); 
+    private ArrayList<Route> routings = new ArrayList<>();
+    private ArrayList<Node> pool = new ArrayList<>();
     
     private boolean state = true;
    
@@ -174,6 +177,28 @@ public class Node extends JComponent implements java.io.Serializable {
         this.connections = conncetions;
     }
 
+    public ArrayList<Route> getRoutings() {
+        return routings;
+    }
+
+    public void setRoutings(ArrayList<Route> routings) {
+        this.routings = routings;
+    }
+    
+    public void addRoute(Route r) {
+        this.routings.add(r);
+    }
+    
+    public Route getMinRoute(Node end) {
+        for(Route r : this.routings) {
+            if(r.getStart() == this)
+                if(r.getEnd() == end)
+                    return r;
+        }
+        
+        return null;
+    }
+    
 //    public Pair<Integer, Integer> getCord() {
 //        return cord;
 //    }
@@ -200,6 +225,29 @@ public class Node extends JComponent implements java.io.Serializable {
        return false;
     }
 
+    public ArrayList<Node> getPool() {
+        return pool;
+    }
+
+    public void setPool(ArrayList<Node> pool) {
+        this.pool = pool;
+    }
+
+    public void pushPool(Node n) {
+        this.pool.add(n);
+    }
+    
+    public Node popPool() {
+        Node temp;
+        if(!pool.isEmpty()) {
+            temp = pool.get(0);
+            pool.remove(0);
+            return temp;
+        }
+        
+        return null;   
+    }
+    
     public void setColor(Color color) {
         this.color = color;
     }
@@ -240,6 +288,15 @@ public class Node extends JComponent implements java.io.Serializable {
         
     }
     
+    public int getMaxWeihgt() {
+        int max = 0;
+        
+        for(Line l : this.connections) {
+            max = Math.max(max, l.getWeight());
+        }
+        
+        return max;
+    }
     
 
 }

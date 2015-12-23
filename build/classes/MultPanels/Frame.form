@@ -36,49 +36,76 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="AddNode" max="32767" attributes="0"/>
-                              <Component id="ConnectButton" max="32767" attributes="0"/>
-                              <Component id="DeleteBranch" alignment="0" max="32767" attributes="0"/>
-                              <Component id="DeleteNodeButton" alignment="0" max="32767" attributes="0"/>
-                              <Component id="DeleteBranchField" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="DeleteNodeField" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="ClearAllButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Component id="SendDatagramButton" alignment="0" max="32767" attributes="0"/>
+                          <Component id="SendButton" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="SendPackageStartField" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="SendPackageEndField" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                          </Group>
-                          <Component id="SendButton" alignment="0" min="-2" pref="108" max="-2" attributes="0"/>
-                          <Component id="ChangeWeightButton" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="ChangeWeightField1" pref="61" max="32767" attributes="0"/>
-                                  <Component id="ChangeWeightField2" max="32767" attributes="0"/>
+                                  <Component id="SendPackageSizeField" max="32767" attributes="0"/>
+                                  <Component id="SendMessageSizeField" pref="72" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="ConnectField1" min="-2" pref="32" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="ConnectField2" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="AddNode" max="32767" attributes="0"/>
+                                          <Component id="ConnectButton" max="32767" attributes="0"/>
+                                          <Component id="DeleteBranch" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="DeleteNodeButton" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="DeleteBranchField" min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="DeleteNodeField" min="-2" pref="32" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Component id="ClearAllButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="ChangeWeightField1" pref="61" max="32767" attributes="0"/>
+                                          <Component id="ChangeWeightField2" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="ConnectField1" min="-2" pref="32" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="ConnectField2" min="-2" pref="32" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="CheckSatelite" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="SendPackageStartField" min="-2" pref="30" max="-2" attributes="0"/>
+                                          <Component id="SendPackageEndField" min="-2" pref="30" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="ShowRoutingTableButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ChangeWeightButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="CheckSatelite" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="46" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="graphicPanel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="51" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -89,7 +116,11 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="graphicPanel" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
                       <Component id="AddNode" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ConnectButton" min="-2" max="-2" attributes="0"/>
@@ -101,16 +132,20 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CheckSatelite" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                      <Component id="DeleteBranch" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="DeleteBranch" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DeleteBranchField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteBranchField" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteNodeButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="DeleteNodeField" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="DeleteNodeButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="DeleteNodeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ClearAllButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="SendDatagramButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="SendButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -122,7 +157,19 @@
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="SendPackageEndField" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="SendMessageSizeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="SendPackageSizeField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="ShowRoutingTableButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="ChangeWeightButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -134,11 +181,11 @@
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ChangeWeightField2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="98" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="graphicPanel" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="SaveButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="LoadButton" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -282,6 +329,50 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Satelite"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Message size"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="SendMessageSizeField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="2048"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="ShowRoutingTableButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show Routing Table"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ShowRoutingTableButtonMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Package size"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="SendPackageSizeField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="512"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="SendDatagramButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send Datagram"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SendDatagramButtonMouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

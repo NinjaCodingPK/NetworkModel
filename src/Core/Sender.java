@@ -19,8 +19,9 @@ import java.util.logging.Logger;
 public class Sender implements Runnable {
     //private final Object lock = new Object();
     private static boolean flag = false;
-    private static  ArrayList<Node> usedNodes = new ArrayList<>();
-    private static ArrayList<Line> usedBranches = new ArrayList<>();
+    private static int size;
+    private static ArrayList<Node> usedNodes = new ArrayList<>();
+    public static ArrayList<Line> usedBranches = new ArrayList<>();
     private static long starttime = System.currentTimeMillis();
     private static ArrayList<Sender> pool = new ArrayList<>();
     //private ArrayList<Node> nodes = new ArrayList<>();
@@ -43,15 +44,17 @@ public class Sender implements Runnable {
        this.finalNode = finalNode;
        this.field = field;
        
+       
     }
     
-    public Sender(Node startNode, Node finalNode, javax.swing.JPanel panel, javax.swing.JTextField field) {
+    public Sender(Node startNode, Node finalNode, int size, javax.swing.JPanel panel, javax.swing.JTextField field) {
        this.panel = panel;
        //this.branches = branches;
        //this.nodes = nodes;
        this.finalNode = finalNode;
        this.start = startNode;
        this.field = field;
+       this.size = size;
     }
     
     public void SendPackage(Node start) {
@@ -69,6 +72,7 @@ public class Sender implements Runnable {
                     if(!usedBranches.contains(l)) {
                         usedBranches.add(l);
                         if((!usedNodes.contains(l.getEndNode()) && (start != l.getEndNode()))) {
+                            //usedBranches.remove(l);
                             // usedNodes.add(l.getEndNode());
                             //new Thread(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field)).start();
                             pool.add(new Sender(l.getEndNode(), l.getStartNode(), this.finalNode, l, panel, field));
@@ -77,6 +81,7 @@ public class Sender implements Runnable {
                         }
                         else 
                             if((!usedNodes.contains(l.getStartNode()) && (start != l.getStartNode()))) {
+                                //usedBranches.remove(l);
                                 //usedNodes.add(l.getStartNode());
                                 //new Thread(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field)).start();
                                 pool.add(new Sender(l.getStartNode(), l.getEndNode(), this.finalNode, l, panel, field));
@@ -97,7 +102,7 @@ public class Sender implements Runnable {
             //if((.getEndNode() == end) || ((l.getStartNode()== end))) {
                 branch.changeColor(Color.green, panel);
                 try {
-                    Thread.sleep(branch.getWeight()*200 + 2000);
+                    Thread.sleep(branch.getWeight()*200 + size);
                     //Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     //Logger.getLogger(Sender.class.getName()).log(Level.SEVERE, null, ex);
@@ -117,6 +122,10 @@ public class Sender implements Runnable {
         usedBranches.clear();
         flag = false;
         pool.clear();
+    }
+    
+    public void removeUsedBranch(Line l) {
+        this.usedBranches.remove(l);
     }
 }
 

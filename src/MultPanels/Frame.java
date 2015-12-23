@@ -7,7 +7,7 @@ package MultPanels;
 
 import Graph.Line;
 import Graph.Node;
-import Core.Core;
+import Core.*;
 import Graph.SGraph;
 import Graph.SNode;
 import java.awt.Color;
@@ -16,6 +16,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author wookie
@@ -64,6 +66,13 @@ public class Frame extends javax.swing.JFrame {
         ChangeWeightField2 = new javax.swing.JTextField();
         SendResult = new javax.swing.JTextField();
         CheckSatelite = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
+        SendMessageSizeField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        ShowRoutingTableButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        SendPackageSizeField = new javax.swing.JTextField();
+        SendDatagramButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +166,35 @@ public class Frame extends javax.swing.JFrame {
 
         CheckSatelite.setText("Satelite");
 
+        jLabel5.setText("Message size");
+
+        SendMessageSizeField.setText("2048");
+
+        jButton1.setText("jButton1");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        ShowRoutingTableButton.setText("Show Routing Table");
+        ShowRoutingTableButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ShowRoutingTableButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel6.setText("Package size");
+
+        SendPackageSizeField.setText("512");
+
+        SendDatagramButton.setText("Send Datagram");
+        SendDatagramButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SendDatagramButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,46 +211,68 @@ public class Frame extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(AddNode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ConnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DeleteBranch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DeleteNodeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DeleteBranchField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(DeleteNodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ClearAllButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(SendDatagramButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(SendButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(SendPackageStartField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SendPackageEndField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(SendButton, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ChangeWeightButton)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ChangeWeightField1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                                    .addComponent(ChangeWeightField2)))
+                                    .addComponent(SendPackageSizeField)
+                                    .addComponent(SendMessageSizeField, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ConnectField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ConnectField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(CheckSatelite))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(AddNode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(ConnectButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(DeleteBranch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(DeleteNodeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(DeleteBranchField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(DeleteNodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(ClearAllButton)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(ChangeWeightField1, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                                            .addComponent(ChangeWeightField2)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ConnectField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ConnectField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(CheckSatelite)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(SendPackageStartField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(SendPackageEndField, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(21, 21, 21)
+                                        .addComponent(jButton1))
+                                    .addComponent(ShowRoutingTableButton)
+                                    .addComponent(ChangeWeightButton))
+                                .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
                         .addComponent(graphicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(51, Short.MAX_VALUE))))
+                        .addGap(38, 38, 38))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(graphicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(AddNode)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -224,16 +284,18 @@ public class Frame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CheckSatelite)
                         .addGap(25, 25, 25)
-                        .addComponent(DeleteBranch)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DeleteBranch)
+                            .addComponent(DeleteBranchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DeleteBranchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DeleteNodeButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(DeleteNodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DeleteNodeButton)
+                            .addComponent(DeleteNodeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ClearAllButton)
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
+                        .addComponent(SendDatagramButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(SendButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -243,7 +305,17 @@ public class Frame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(SendPackageEndField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(SendMessageSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(SendPackageSizeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(ShowRoutingTableButton)
+                        .addGap(18, 18, 18)
                         .addComponent(ChangeWeightButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -253,9 +325,9 @@ public class Frame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(ChangeWeightField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 98, Short.MAX_VALUE))
-                    .addComponent(graphicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(14, 14, 14)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SaveButton)
                     .addComponent(LoadButton)
@@ -309,11 +381,22 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_ClearAllButtonMouseClicked
 
     private void SendButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SendButtonMouseClicked
-        // TODO add your handling code here:
-        core.SendPackage(Integer.parseInt(SendPackageStartField.getText()), 
-                        Integer.parseInt(SendPackageEndField.getText()), 
-                            graphicPanel, SendResult);
-        //core.getBranches().get(0).changeColor(Color.GREEN, graphicPanel);
+        core.MakeRoutingTable();
+        LogicSend s = new LogicSend(core.getNodes(), core.getBranches(), graphicPanel, this.SendResult);
+        s.ModelSend(core.getNodeByNum(Integer.parseInt(SendPackageStartField.getText())), 
+                core.getNodeByNum(Integer.parseInt(SendPackageEndField.getText())),
+                Integer.parseInt(SendMessageSizeField.getText()),
+                Integer.parseInt(SendPackageSizeField.getText()));
+//        try {
+//            // TODO add your handling code here:
+//            core.SendMessage(Integer.parseInt(SendPackageStartField.getText()),
+//                    Integer.parseInt(SendPackageEndField.getText()),
+//                    Integer.parseInt(SendPackageSizeField.getText()),
+//                    graphicPanel, SendResult);
+//            //core.getBranches().get(0).changeColor(Color.GREEN, graphicPanel);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }//GEN-LAST:event_SendButtonMouseClicked
 
     private void SaveButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveButtonMouseClicked
@@ -367,6 +450,41 @@ public class Frame extends javax.swing.JFrame {
                 .setWeight(Integer.parseInt(ChangeWeightField2.getText()),
                         graphicPanel);
     }//GEN-LAST:event_ChangeWeightButtonMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        core.GraphtoMatrix();
+        core.ShowMatrix();
+        Dijkstras d = new Dijkstras(core.getMatrix());
+        
+        d.DijkstrasAlg(1, 0);
+        for(int i : d.getPath()) {
+            System.out.print(i + " -> ");       
+        }
+        
+        core.MakeRoutingTable();
+       
+        LogicSend s = new LogicSend(core.getNodes(), core.getBranches(), graphicPanel, this.SendResult);
+        s.Send(core.getNodeByNum(0), core.getNodeByNum(3), 2000);
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void ShowRoutingTableButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ShowRoutingTableButtonMouseClicked
+        // TODO add your handling code here:
+        core.MakeRoutingTable();
+        RoutingTableFrame f = new RoutingTableFrame(core.getNodes());
+        f.setVisible(true);
+    }//GEN-LAST:event_ShowRoutingTableButtonMouseClicked
+
+    private void SendDatagramButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SendDatagramButtonMouseClicked
+        // TODO add your handling code here:
+        core.MakeRoutingTable();
+        DatagramSend s = new DatagramSend(core.getNodes(), core.getBranches(), graphicPanel, SendResult);
+        s.ModelSend(core.getNodeByNum(Integer.parseInt(SendPackageStartField.getText())), 
+                core.getNodeByNum(Integer.parseInt(SendPackageEndField.getText())),
+                Integer.parseInt(SendMessageSizeField.getText()),
+                Integer.parseInt(SendPackageSizeField.getText()));
+        
+    }//GEN-LAST:event_SendDatagramButtonMouseClicked
     
     public void ShowResults(long time) {
         SendResult.setText("Result of package transmission : " + Long.toString(time));
@@ -423,13 +541,20 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton LoadButton;
     private javax.swing.JButton SaveButton;
     private javax.swing.JButton SendButton;
+    private javax.swing.JButton SendDatagramButton;
+    private javax.swing.JTextField SendMessageSizeField;
     private javax.swing.JTextField SendPackageEndField;
+    private javax.swing.JTextField SendPackageSizeField;
     private javax.swing.JTextField SendPackageStartField;
     private javax.swing.JTextField SendResult;
+    private javax.swing.JButton ShowRoutingTableButton;
     private MultPanels.GraphicsPanel graphicPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }

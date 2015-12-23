@@ -17,6 +17,8 @@ public class Core implements java.io.Serializable {
     private final ArrayList<Node> nodes = new ArrayList<>();
     private final ArrayList<Line> branches = new ArrayList<>();
     private final Integer weights[] = {1, 2, 3, 4, 5, 6}; 
+    private int matrix[][];
+    private int transiet_matrix[][];
     
     public Node getNodeByNum(int num) {
         for(Node n : nodes) {
@@ -164,21 +166,120 @@ public class Core implements java.io.Serializable {
 
     }
     
-    public void SendPackage(int start, int end, javax.swing.JPanel panel, javax.swing.JTextField field) {
+    public void SendMessage(int start, int end, int package_size, javax.swing.JPanel panel, javax.swing.JTextField field) throws InterruptedException {
 //        Sender s = new Sender(nodes.get(0), nodes.get(1), nodes, branches, panel);
-       if(nodes.get(start).isState() && nodes.get(start).isState()) {
-            Sender s = new Sender(nodes.get(start), nodes.get(end), panel, field);
-            s.Clear();
-            field.setText("Transmission started");
-            s.SendPackage(nodes.get(start));
-        } else
-           field.setText("Can't send package. One of the nodes is offline.");
+        
+        //for(int i = 0; i < 2; i++)
+            if(nodes.get(start).isState() && nodes.get(start).isState()) {
+                Sender s = new Sender(nodes.get(start), nodes.get(end), package_size, panel, field);
+                s.Clear();
+                field.setText("Transmission started");
+                s.SendPackage(nodes.get(start));
+                
+                //new Thread(new Waiter(nodes.get(start).getMaxWeihgt(), package_size, nodes.get(start), nodes.get(end),
+                //                    package_size, panel, field)).start();
+                
+                
+                
+            } else
+                field.setText("Can't send package. One of the nodes is offline.");
 //        new Thread(s).start();
         
 //        Algorithm a = new Algorithm(nodes, branches);
 //        a.SendPackage(0, 1, panel);
     }
     
+    public void GraphtoMatrix() {
+        int temp[][] = new int[nodes.size()][nodes.size()];
+        int transiet_temp[][] = new int[nodes.size()][nodes.size()];
+        
+        for(Node n : nodes) {
+            for(Line l : n.getConnetions()) {
+                if(l.getEndNode() != n) {
+                    temp[n.getNum()][l.getEndNode().getNum()] = l.getWeight();
+                    transiet_temp[n.getNum()][l.getEndNode().getNum()] = 1;
+                }
+                else {
+                    temp[n.getNum()][l.getStartNode().getNum()] = l.getWeight();
+                    transiet_temp[n.getNum()][l.getStartNode().getNum()] = 1;
+                }
+            }
+        }
+        
+        this.matrix = temp;
+        this.transiet_matrix = transiet_temp;
+    }
+    
+    public void ShowMatrix() {
+        for(int i = 0; i < nodes.size(); i++) {
+            for(int j = 0; j < nodes.size(); j++)
+                System.out.print(matrix[i][j] + " ");
+            
+            System.out.println();
+        }
+    }
+
+    public int[][] getMatrix() {
+        return matrix;
+    }
+
+    public int[][] getTransiet_matrix() {
+        return transiet_matrix;
+    }
+    
+    public void MakeRoutingTable() {
+        //Dijkstras d = new Dijkstras(this.matrix);
+        //ArrayList<Node> temp = new ArrayList<>();
+        this.GraphtoMatrix();
+        
+        for(Node s : nodes) {
+            for(Node e : nodes) {
+                if(s != e) {
+                    for(int i = 0; i < 3; i++)
+                    {
+                        Dijkstras d = new Dijkstras(this.matrix);
+                        d.DijkstrasAlg(s.getNum(), e.getNum());
+                        
+                        Dijkstras tr = new Dijkstras(this.transiet_matrix);
+                        tr.DijkstrasAlg(s.getNum(), e.getNum());
+                    
+                        ArrayList<Node> temp = new ArrayList<>();
+                        for(int j : d.getPath()) {
+                            this.matrix[s.getNum()][j] = 0;
+                            temp.add(this.getNodeByNum(j));
+                        } 
+                    
+                        getNodeByNum(s.getNum()).addRoute(new Route(s, e, temp, d.getlength(), tr.getlength()));
+                        //temp.clear();
+                    }
+                    this.GraphtoMatrix();
+                }
+            }
+        }
+    }
+    
 }
 
 
+//public void MakeRoutingTable() {
+//        //Dijkstras d = new Dijkstras(this.matrix);
+//        //ArrayList<Node> temp = new ArrayList<>();
+//        this.GraphtoMatrix();
+//        
+//        for(Node s : nodes) {
+//            for(Node e : nodes) {
+//                if(s != e) {
+//                    Dijkstras d = new Dijkstras(this.matrix);
+//                    d.DijkstrasAlg(s.getNum(), e.getNum());
+//                    
+//                    ArrayList<Node> temp = new ArrayList<>();
+//                    for(int i : d.getPath()) {
+//                       temp.add(this.getNodeByNum(i));
+//                    } 
+//                    
+//                    getNodeByNum(s.getNum()).addRoute(new Route(s, e, temp, d.getlength()));
+//                    //temp.clear();
+//                }
+//            }
+//        }
+//    }
